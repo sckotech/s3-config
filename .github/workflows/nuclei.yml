@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Nuclei - DAST Scan
-        uses: projectdiscovery/nuclei-action@main
+        uses: projectdiscovery/nuclei-action@dev
         with:
           target: https://epic.packtpub.com
 

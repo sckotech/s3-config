@@ -13,6 +13,7 @@ jobs:
 
       - name: Nuclei - DAST Scan
         uses: projectdiscovery/nuclei-action@main
+        if: github.ref == 'refs/heads/dev'
         with:
           target: https://epic.packtpub.com
 

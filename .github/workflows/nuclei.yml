@@ -17,7 +17,7 @@ jobs:
         uses: projectdiscovery/nuclei-action@main
         with:
           target: https://epic.packtpub.com
-          json: nuclei.json
+          json: 
 
       - name: GitHub Workflow artifacts
         uses: actions/upload-artifact@v2

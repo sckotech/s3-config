@@ -22,5 +22,5 @@ jobs:
       - name: GitHub Workflow artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: nuclei.json
-          path: nuclei.json
+          name: nuclei.log
+          path: nuclei.log

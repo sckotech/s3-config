@@ -4,7 +4,7 @@ on:
   push:
 jobs:
   first-Job:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: echo test command
         run: echo "Hello world"

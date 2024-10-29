@@ -1,20 +1,23 @@
+
 name: Nuclei - Vulnerability Scan
 
 on:
     schedule:
-      - cron: '*/5 * * * *' # Run at 11:40 UTC every Monday
-    workflow_dispatch: # Option to run manually if requested.
+      - cron: '0 1 * * *'
+    workflow_dispatch:
 
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Nuclei - Vulnerability Scan
         id: nuclei_scan
         uses: projectdiscovery/nuclei-action@main
         with:
           target: https://www.staging.packtpub.com
+
       - name: GitHub Workflow artifacts
         uses: actions/upload-artifact@v4
         with:

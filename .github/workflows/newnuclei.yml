@@ -19,7 +19,7 @@ jobs:
         id: nuclei_scan
         uses: projectdiscovery/nuclei-action@main
         with:
-          target: https://www.staging.packtpub.com
+          target: https://staging.packtpub.com
 
       - name: GitHub Workflow artifacts
         uses: actions/upload-artifact@v4

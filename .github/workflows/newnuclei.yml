@@ -1,9 +1,13 @@
 name: Nuclei - Vulnerability Scan
 
 on:
-    schedule:
-      - cron: '0 0 * * *'
-    workflow_dispatch:
+  push:
+    branches:
+      - staging              # Run only on the staging branch
+  schedule:
+    - cron: '0 0 * * *'      # Run daily at midnight
+  workflow_dispatch:          # Allows manual triggering
+
 
 jobs:
   nuclei-scan:

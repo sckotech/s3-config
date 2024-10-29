@@ -1,4 +1,4 @@
-name: Nuclei - Vulnerability Scan
+name: Nuclei - Vulnerability Scan Dev Branch
 
 on:
     schedule:

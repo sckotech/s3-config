@@ -8,6 +8,7 @@ on:
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'  # Only run if branch is staging
     steps:
       - uses: actions/checkout@v4
 

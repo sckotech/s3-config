@@ -2,8 +2,8 @@ name: Nuclei - Vulnerability Scan
 
 on:
     schedule:
-      - cron: '*/5 * * * * *'
-    workflow_dispatch:
+      - cron: '*/5 * * * *' # Run at 11:40 UTC every Monday
+    workflow_dispatch: # Option to run manually if requested.
 
 jobs:
   nuclei-scan:

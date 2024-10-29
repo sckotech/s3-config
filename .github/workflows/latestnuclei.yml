@@ -1,9 +1,8 @@
-
 name: Nuclei - Vulnerability Scan
 
 on:
     schedule:
-      - cron: '57 22 * * *'
+      - cron: '12 23 * * *'
     workflow_dispatch:
 
 jobs:
@@ -23,3 +22,5 @@ jobs:
         with:
           name: nuclei.log
           path: nuclei.log
+
+      

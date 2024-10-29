@@ -1,9 +1,7 @@
 name: Nuclei - Vulnerability Scan
 
 on:
-  push:
-    branches:
-      - staging              # Run only on the staging branch
+            # Run only on the staging branch
   schedule:
     - cron: '0 0 * * *'      # Run daily at midnight
   workflow_dispatch:          # Allows manual triggering
@@ -12,6 +10,7 @@ on:
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'  # Only run if branch is staging
     steps:
       - uses: actions/checkout@v4
 

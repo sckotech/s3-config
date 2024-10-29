@@ -3,7 +3,7 @@ name: Nuclei - Vulnerability Scan
 on:
             # Run only on the staging branch
   schedule:
-    - cron: '0 0 * * *'      # Run daily at midnight
+    - cron: '11 02 * * *'      # Run daily at midnight
   workflow_dispatch:          # Allows manual triggering
 
 

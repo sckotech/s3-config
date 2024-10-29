@@ -4,7 +4,7 @@ name: Run Linux Command
 on: 
   push:
     branches:
-      - master  # Trigger on pushes to the main branch
+      - main  # Trigger on pushes to the main branch
   workflow_dispatch:  # Allows for manual triggering  
 
 jobs:

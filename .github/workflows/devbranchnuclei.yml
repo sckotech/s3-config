@@ -8,19 +8,9 @@ on:
 jobs:
   nuclei-scan:
     runs-on: ubuntu-latest
+    if: github.ref == ‘refs/heads/dev’ && github.event_name == ‘schedule’ 
     steps:
       - uses: actions/checkout@v4
-      - name: Get current branch name
-        id: get_branch
-        run: echo "branch_name=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-      - name: Check branch
-        run: |
-          if [[ "$GITHUB_ENV" != "dev" && "$GITHUB_ENV" != "staging" ]]; then
-            echo "Not on staging or dev branch. Exiting."
-            exit 0
-          fi
-
       - name: Nuclei - Vulnerability Scan
         id: nuclei_scan
         uses: projectdiscovery/nuclei-action@main

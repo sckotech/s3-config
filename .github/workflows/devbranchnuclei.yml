@@ -16,7 +16,7 @@ jobs:
 
       - name: Check branch
         run: |
-          if [[ "$GITHUB_ENV" != "dev" && "$GITHUB_ENV" != "dev" ]]; then
+          if [[ "$GITHUB_ENV" != "dev" && "$GITHUB_ENV" != "staging" ]]; then
             echo "Not on staging or dev branch. Exiting."
             exit 0
           fi

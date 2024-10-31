@@ -2,7 +2,7 @@ name: Nuclei - Vulnerability Scan Dev Branch
 
 on:
   schedule:
-    - cron: '0 */1 * * *'
+    - cron: '43 9 * * *'
   workflow_dispatch:
 
 jobs:

@@ -19,7 +19,7 @@ jobs:
           nuclei -version
 
       - name: Run Nuclei
-        run: nuclei -u https://www.packtpub.com/ -json-export nuclei-results.json
+        run: nuclei -u http://testphp.vulnweb.com/ -json-export nuclei-results.json
 
       - name: Upload results to DefectDojo
         run: |

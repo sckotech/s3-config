@@ -1,21 +1,20 @@
-name: DAST Nuclei Scan
+name: Dast Nuclei → DefectDojo
 
 on:
+  workflow_dispatch:   # run manually for now
   push:
-    branches: [ "main" ]
-  pull_request:
-  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   nuclei:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install Nuclei
         run: |
           curl -sSfL https://install.projectdiscovery.io | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Run Nuclei
         run: nuclei -u https://www.packtpub.com/ -json -o nuclei-results.json

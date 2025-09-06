@@ -13,8 +13,10 @@ jobs:
 
       - name: Install Nuclei
         run: |
-          curl -sSfL https://install.projectdiscovery.io | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          curl -sL https://github.com/projectdiscovery/nuclei/releases/latest/download/nuclei-linux-amd64.zip -o nuclei.zip
+          unzip nuclei.zip
+          sudo mv nuclei /usr/local/bin/
+          nuclei -version
 
       - name: Run Nuclei
         run: nuclei -u https://www.packtpub.com/ -json -o nuclei-results.json

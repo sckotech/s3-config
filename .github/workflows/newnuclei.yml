@@ -1,31 +1,44 @@
-name: Dast Nuclei → DefectDojo
+name: DAST Nuclei + Katana → DefectDojo
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
 
 jobs:
-  nuclei:
+  nuclei_scan:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
+      # Install Katana
+      - name: Install Katana
+        run: |
+          curl -sSfL https://github.com/projectdiscovery/katana/releases/latest/download/katana-linux-amd64.zip -o katana.zip
+          unzip -j katana.zip katana
+          sudo mv katana /usr/local/bin/
+          katana -version
+
+      # Install Nuclei
       - name: Install Nuclei
         run: |
-          curl -sL https://github.com/projectdiscovery/nuclei/releases/download/v3.4.10/nuclei_3.4.10_linux_amd64.zip -o nuclei.zip
-          unzip -j nuclei.zip nuclei
+          curl -sL https://github.com/projectdiscovery/nuclei/releases/latest/download/nuclei-linux-amd64.tar.gz -o nuclei.tar.gz
+          tar -xzf nuclei.tar.gz
           sudo mv nuclei /usr/local/bin/
           nuclei -version
+
+      # Update Nuclei Templates
       - name: Update Nuclei Templates
-        run: nuclei -update-templates  
+        run: nuclei -update-templates
 
-      - name: Start OWASP Juice Shop (vulnerable app)
-        run: docker run -d -p 3000:3000 bkimminich/juice-shop  
+      # Crawl target URLs with Katana
+      - name: Crawl URLs with Katana
+        run: katana -u http://testphp.vulnweb.com -o urls.txt
 
+      # Run Nuclei scan on crawled URLs
       - name: Run Nuclei
-        run: nuclei -u http://localhost:3000 -severity critical,high -json-export nuclei-results.json
+        run: nuclei -target urls.txt -severity critical,high,medium -json-export nuclei-results.json
 
+      # Upload results to DefectDojo
       - name: Upload results to DefectDojo
         run: |
           curl -X POST "${{ secrets.DOJO_URL }}/api/v2/import-scan/" \

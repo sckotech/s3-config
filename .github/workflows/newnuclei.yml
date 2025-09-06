@@ -1,4 +1,4 @@
-name: Nuclei Scan
+name: Sunil Nuclei Scan
 
 on:
   push:

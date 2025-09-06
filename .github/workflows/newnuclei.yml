@@ -24,7 +24,7 @@ jobs:
         run: docker run -d -p 3000:3000 bkimminich/juice-shop  
 
       - name: Run Nuclei
-        run: nuclei -u http://localhost:3000 -severity critical,high,medium -tags xss,sqli,cves -json-export nuclei-results.json
+        run: nuclei -u http://localhost:3000 -severity critical,high,medium -json-export nuclei-results.json
 
       - name: Upload results to DefectDojo
         run: |

@@ -31,9 +31,12 @@ jobs:
       - name: Update Nuclei Templates
         run: nuclei -update-templates
 
+      - name: Start OWASP Juice Shop (vulnerable app)
+        run: docker run -d -p 3000:3000 bkimminich/juice-shop  
+
       # Crawl target URLs with Katana
       - name: Crawl URLs with Katana
-        run: katana -u http://testphp.vulnweb.com -o urls.txt
+        run: katana -u http://localhost:3000 -o urls.txt
 
       # Run Nuclei scan on crawled URLs
       - name: Run Nuclei

@@ -1,0 +1,34 @@
+name: Nuclei Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  nuclei:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Nuclei
+        run: |
+          curl -s https://api.github.com/repos/projectdiscovery/nuclei/releases/latest \
+            | grep "browser_download_url.*linux_amd64.zip" \
+            | cut -d '"' -f 4 \
+            | wget -qi -
+          unzip nuclei-*-linux_amd64.zip
+          sudo mv nuclei /usr/local/bin/
+
+      - name: Run Nuclei
+        run: nuclei -u https://www.packtpub.com/ -json -o nuclei-results.json
+
+      - name: Upload results to DefectDojo
+        run: |
+          curl -X POST "${{ secrets.DOJO_URL }}/api/v2/import-scan/" \
+            -H "Authorization: Token ${{ secrets.DOJO_API_TOKEN }}" \
+            -F 'scan_type=Nuclei Scan' \
+            -F 'engagement=${{ secrets.DOJO_ENGAGEMENT_ID }}' \
+            -F 'file=@nuclei-results.json'

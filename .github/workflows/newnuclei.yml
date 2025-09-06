@@ -19,7 +19,7 @@ jobs:
           nuclei -version
 
       - name: Run Nuclei
-        run: nuclei -u http://demo.testfire.net/ -tags xss,sqli,cves -json-export nuclei-results.json
+        run: nuclei -u http://testphp.vulnweb.com/ --t /home/runner/nuclei-templates/ -tags xss,sqli,cves -json-export nuclei-results.json
 
       - name: Upload results to DefectDojo
         run: |

@@ -33,7 +33,7 @@ jobs:
 
         # Crawl target URLs with Katana
       - name: Crawl URLs with Katana
-        run: katana -u http://demo.testfire.net/ -o urls.txt
+        run: katana -u http://testphp.vulnweb.com/search.php?test=query -o urls.txt
 
       # Run Nuclei scan on crawled URLs
       - name: Run Nuclei

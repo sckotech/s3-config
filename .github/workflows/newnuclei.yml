@@ -13,16 +13,17 @@ jobs:
       # Install Katana
       - name: Install Katana
         run: |
-          curl -sSfL https://github.com/projectdiscovery/katana/releases/latest/download/katana-linux-amd64.zip -o katana.zip
-          unzip -j katana.zip katana
-          sudo mv katana /usr/local/bin/
-          katana -version
+         curl -sL https://github.com/projectdiscovery/katana/releases/download/v1.2.2/katana_1.2.2_linux_amd64.zip -o katana.zip
+         unzip -j katana.zip katana
+         sudo mv katana /usr/local/bin/
+         katana -version
+
 
       # Install Nuclei
       - name: Install Nuclei
         run: |
-          curl -sL https://github.com/projectdiscovery/nuclei/releases/latest/download/nuclei-linux-amd64.tar.gz -o nuclei.tar.gz
-          tar -xzf nuclei.tar.gz
+          curl -sL https://github.com/projectdiscovery/nuclei/releases/download/v3.4.10/nuclei_3.4.10_linux_amd64.zip -o nuclei.zip
+          unzip -j nuclei.zip nuclei
           sudo mv nuclei /usr/local/bin/
           nuclei -version
 

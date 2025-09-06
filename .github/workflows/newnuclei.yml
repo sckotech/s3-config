@@ -37,7 +37,7 @@ jobs:
 
       # Run Nuclei scan on crawled URLs
       - name: Run Nuclei
-        run: nuclei -u "http://testphp.vulnweb.com/search.php?test=query"  -t /home/runner/nuclei-templates/ -json-export nuclei-results.json
+        run: nuclei -u "http://testphp.vulnweb.com/search.php?test="  -t /home/runner/nuclei-templates/ -json-export nuclei-results.json
 
       # Upload results to DefectDojo
       - name: Upload results to DefectDojo

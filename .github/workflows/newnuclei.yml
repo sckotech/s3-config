@@ -1,7 +1,7 @@
 name: Dast Nuclei → DefectDojo
 
 on:
-  workflow_dispatch:   # run manually for now
+  workflow_dispatch:
   push:
     branches: [ main ]
 
@@ -24,5 +24,5 @@ jobs:
           curl -X POST "${{ secrets.DOJO_URL }}/api/v2/import-scan/" \
             -H "Authorization: Token ${{ secrets.DOJO_API_TOKEN }}" \
             -F 'scan_type=Nuclei Scan' \
-            -F 'engagement=${{ secrets.DOJO_ENGAGEMENT_ID }}' \
+            -F "engagement=${{ secrets.DOJO_ENGAGEMENT_ID }}" \
             -F 'file=@nuclei-results.json'

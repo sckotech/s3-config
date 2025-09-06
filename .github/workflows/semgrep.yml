@@ -19,13 +19,10 @@ jobs:
       - name: Run Semgrep Scan
         run: semgrep --config=p/security-audit --json --error . > semgrep-report.json
 
-      - name: Send report to DefectDojo
+      - name: Upload results to DefectDojo
         run: |
-          curl -X POST "${{ secrets.DEFECTDOJO_URL }}/api/v2/import-scan/" \
-            -H "Authorization: Token ${{ secrets.DEFECTDOJO_API_KEY }}" \
-            -F "file=@semgrep-report.json" \
-            -F "scan_type=Semgrep JSON Report" \
-            -F "product=${{ secrets.DEFECTDOJO_PRODUCT_ID }}" \
-            -F "engagement=${{ secrets.DEFECTDOJO_ENGAGEMENT_ID }}" \
-            -F "active=true" \
-            -F "verified=false"
+          curl -X POST "${{ secrets.DOJO_URL }}/api/v2/import-scan/" \
+            -H "Authorization: Token ${{ secrets.DOJO_API_TOKEN }}" \
+            -F 'scan_type=Nuclei Scan' \
+            -F "engagement=${{ secrets.DOJO_ENGAGEMENT_ID }}" \
+            -F 'file=@semgrep-report.json'

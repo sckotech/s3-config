@@ -1,0 +1,7 @@
+{
+  "dbInstanceIdentifier": "prod-db",
+  "engine": "postgres",
+  "masterUsername": "admin",
+  "masterUserPassword": "MyStrongP@ssw0rd",
+  "endpoint": "prod-db.cle1xyzabcde.us-east-1.rds.amazonaws.com"
+}

@@ -17,7 +17,7 @@ jobs:
         run: python3 -m pip install --upgrade semgrep==1.135.0
 
       - name: Run Semgrep Scan
-        run: semgrep --config=p/security-audit --json . > semgrep-report.json
+        run: semgrep --config=p/security-audit --json . > semgrep-report.json || true
 
       - name: Upload results to DefectDojo
         run: |

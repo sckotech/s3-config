@@ -31,3 +31,12 @@ jobs:
             -F "active=true" \
             -F "verified=false" \
             -F "file=@semgrep-report.json"
+      - name: Fail if high severity issues
+        run: |
+         HIGH_COUNT=$(jq '[.results[] | select(.extra.severity == "ERROR")] | length' semgrep-report.json)
+         if [ "$HIGH_COUNT" -gt 0 ]; then
+         echo "❌ High severity issues found: $HIGH_COUNT"
+         exit 1
+         else
+         echo "✅ No high severity issues found."
+         fi

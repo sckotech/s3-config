@@ -13,12 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Semgrep Latest
+      - name: Install Semgrep v1.135.0
         run: python3 -m pip install --upgrade semgrep==1.135.0
 
       - name: Run Semgrep Scan
-        run: semgrep --config=p/security-audit --json . > semgrep-report.json
-       
+        run: |
+          semgrep --config=p/security-audit --json . --error | tee semgrep-report.json
+
       - name: Upload results to DefectDojo
         run: |
           curl -X POST "${{ secrets.DOJO_URL }}/api/v2/import-scan/" \
@@ -27,7 +28,6 @@ jobs:
             -F 'scan_type=Semgrep JSON Report' \
             -F "engagement=${{ secrets.DOJO_ENGAGEMENT_ID }}" \
             -F "auto_create_context=true" \
-            -F 'file=@semgrep-report.json'
             -F "active=true" \
-            -F "verified=false"
-     
+            -F "verified=false" \
+            -F "file=@semgrep-report.json"

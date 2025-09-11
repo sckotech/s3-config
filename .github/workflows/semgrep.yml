@@ -18,7 +18,7 @@ jobs:
 
       - name: Run Semgrep Scan
         run: |
-          semgrep --config=p/security-audit --json . --error | tee semgrep-report.json
+          semgrep --config=p/security-audit --json . --error --json-output semgrep-report.json
 
       - name: Upload results to DefectDojo
         run: |
